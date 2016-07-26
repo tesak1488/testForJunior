@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
+class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating {
     
     var stations = [Station]()
     var filteredStations = [Station]()
@@ -34,7 +34,6 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         })
         task.resume()
-        resultsSearchController.searchBar.delegate = self
         resultsSearchController.searchResultsUpdater = self
         resultsSearchController.dimsBackgroundDuringPresentation = false
         resultsSearchController.searchBar.sizeToFit()
@@ -96,11 +95,13 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
         let showAction = UITableViewRowAction(style: .Default, title: "Detail", handler: {
             (action, indexPath) -> Void in
             if !self.resultsSearchController.active {
-                let alertAction = UIAlertController(title: "Information", message: "cityId: \(self.groupedStations[indexPath.section][indexPath.row].cityId)\n stationId: \(self.groupedStations[indexPath.section][indexPath.row].stationId)\n regionTitle: \(self.groupedStations[indexPath.section][indexPath.row].regionTitle)\n disrtictTitle: \(self.groupedStations[indexPath.section][indexPath.row].districtTitle)\n ", preferredStyle: .Alert)
+                
+                let alertAction = UIAlertController(title: "Information", message: "cityId: \(self.groupedStations[indexPath.section][indexPath.row].cityId)\n stationId: \(self.groupedStations[indexPath.section][indexPath.row].stationId)\n regionTitle: \(self.groupedStations[indexPath.section][indexPath.row].regionTitle)\n disrtictTitle: \(self.groupedStations[indexPath.section][indexPath.row].districtTitle)\n latitude: \(self.groupedStations[indexPath.section][indexPath.row].point["latitude"]!)\n longitude: \(self.groupedStations[indexPath.section][indexPath.row].point["longitude"]!)", preferredStyle: .Alert)
                 alertAction.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
                 self.presentViewController(alertAction, animated: true, completion: nil)
             } else {
-                let alertAction = UIAlertController(title: "Information", message: "cityId: \(self.filteredStations[indexPath.row].cityId)\n stationId: \(self.filteredStations[indexPath.row].stationId)\n regionTitle: \(self.filteredStations[indexPath.row].regionTitle)\n disrtictTitle: \(self.filteredStations[indexPath.row].districtTitle)\n ", preferredStyle: .Alert)
+                
+                let alertAction = UIAlertController(title: "Information", message: "cityId: \(self.filteredStations[indexPath.row].cityId)\n stationId: \(self.filteredStations[indexPath.row].stationId)\n regionTitle: \(self.filteredStations[indexPath.row].regionTitle)\n disrtictTitle: \(self.filteredStations[indexPath.row].districtTitle)\n latitude: \(self.filteredStations[indexPath.row].point["latitude"]!)\n longitude: \(self.filteredStations[indexPath.row].point["longitude"]!)", preferredStyle: .Alert)
                 alertAction.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
                 self.presentViewController(alertAction, animated: true, completion: nil)
             }
@@ -116,19 +117,20 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
     func parseJson(data: NSData) {
         do {
             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
-            let citiesFromList = jsonResult!["citiesTo"] as! [AnyObject]
-            for citiesFrom in citiesFromList {
-                let stationsList = citiesFrom["stations"] as! [AnyObject]
-                for stations in stationsList {
+            let citiesFrom = jsonResult!["citiesTo"] as! [AnyObject]
+            for cityFrom in citiesFrom {
+                let stations = cityFrom["stations"] as! [AnyObject]
+                for station in stations {
                     let localStation = Station()
-                    localStation.countryTitle = stations["countryTitle"] as! String
-                    localStation.cityTitle = stations["cityTitle"] as! String
-                    localStation.point = stations["point"] as! [String: Double]
-                    localStation.stationTitle = stations["stationTitle"] as! String
-                    localStation.cityId = stations["cityId"] as! Int
-                    localStation.regionTitle = stations["regionTitle"] as! String
-                    localStation.districtTitle = stations["districtTitle"] as! String
-                    localStation.stationId = stations["stationId"] as! Int
+                    localStation.countryTitle = station["countryTitle"] as! String
+                    localStation.cityTitle = station["cityTitle"] as! String
+                    localStation.point["latitude"] = station["point"]!!["latitude"] as! Double
+                    localStation.point["longitude"] = station["point"]!!["longitude"] as! Double
+                    localStation.stationTitle = station["stationTitle"] as! String
+                    localStation.cityId = station["cityId"] as! Int
+                    localStation.regionTitle = station["regionTitle"] as! String
+                    localStation.districtTitle = station["districtTitle"] as! String
+                    localStation.stationId = station["stationId"] as! Int
                     self.stations.append(localStation)
                 }
             }

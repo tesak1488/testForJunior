@@ -15,7 +15,7 @@ class Station {
     var cityId = 0
     var regionTitle = ""
     var stationId = 0
-    var point: [String : Double] = ["": 0.0]
+    var point: [String : Double]! = ["latitude": 0.0, "longitude": 0.0]
     var cityTitle = ""
     
 }
