@@ -12,4 +12,6 @@ class Info {
     static var stationFrom = "Не выбрано"
     static var stationTo = "Не выбрано"
     static var date = "Не выбрано"
+    static var stationsFrom = [Station]()
+    static var stationsTo = [Station]()
 }

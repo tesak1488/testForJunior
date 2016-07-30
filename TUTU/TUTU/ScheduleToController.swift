@@ -19,7 +19,7 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if Info.stationsTo.isEmpty {
         let task = NSURLSession.sharedSession().dataTaskWithRequest(NSURLRequest(URL: NSURL(string: "https://raw.githubusercontent.com/tutu-ru/hire_ios-test/master/allStations.json")!), completionHandler: {
             (data, response, error) -> Void in
             
@@ -30,10 +30,17 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
             if let data = data {
                 self.parseJson(data)
                 self.makeStationsGrouped()
+                Info.stationsTo = self.stations
                 NSOperationQueue.mainQueue().addOperationWithBlock({()-> Void in self.tableView.reloadData()})
             }
         })
         task.resume()
+        } else {
+            stations = Info.stationsTo
+            makeStationsGrouped()
+            tableView.reloadData()
+        }
+        resultsSearchController.loadViewIfNeeded()
         resultsSearchController.searchResultsUpdater = self
         resultsSearchController.dimsBackgroundDuringPresentation = false
         resultsSearchController.searchBar.sizeToFit()
@@ -124,8 +131,8 @@ class ScheduleToController: UIViewController, UITableViewDelegate, UITableViewDa
                     let localStation = Station()
                     localStation.countryTitle = station["countryTitle"] as! String
                     localStation.cityTitle = station["cityTitle"] as! String
-                    localStation.point["latitude"] = station["point"]!!["latitude"] as! Double
-                    localStation.point["longitude"] = station["point"]!!["longitude"] as! Double
+                    localStation.point["latitude"] = station["point"]!!["latitude"] as? Double
+                    localStation.point["longitude"] = station["point"]!!["longitude"] as? Double
                     localStation.stationTitle = station["stationTitle"] as! String
                     localStation.cityId = station["cityId"] as! Int
                     localStation.regionTitle = station["regionTitle"] as! String

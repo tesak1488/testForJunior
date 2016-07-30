@@ -18,7 +18,6 @@ class DateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.hidden = false
     }
 
 }

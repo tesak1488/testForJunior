@@ -87,21 +87,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sf" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlE-jn-d9d">
-                                <rect key="frame" x="147" y="122" width="320" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не выбрано" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlE-jn-d9d">
+                                <rect key="frame" x="140" y="123" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Ymh-4K-Psp"/>
                                     <constraint firstAttribute="width" constant="320" id="dbQ-QS-txf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="st" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1a-Eu-tt0">
-                                <rect key="frame" x="140" y="245" width="320" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="UGv-p2-8Lk"/>
-                                    <constraint firstAttribute="width" constant="320" id="vLR-U2-gVi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -112,6 +102,16 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ApD-Ld-lzT"/>
                                     <constraint firstAttribute="width" constant="308" id="bsH-8y-7GB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не выбрано" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1a-Eu-tt0">
+                                <rect key="frame" x="140" y="245" width="320" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="UGv-p2-8Lk"/>
+                                    <constraint firstAttribute="width" constant="320" id="vLR-U2-gVi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -134,9 +134,9 @@
                             <constraint firstItem="Cde-VP-Yat" firstAttribute="top" secondItem="sRP-cH-dua" secondAttribute="bottom" constant="19" id="eLL-jr-egg"/>
                             <constraint firstItem="sRP-cH-dua" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" id="kvA-Hb-GFP"/>
                             <constraint firstItem="Cde-VP-Yat" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" constant="1" id="mV1-dr-IjB"/>
-                            <constraint firstItem="xlE-jn-d9d" firstAttribute="top" secondItem="Fh1-cJ-kef" secondAttribute="bottom" constant="16" id="tAQ-Ex-GoD"/>
+                            <constraint firstItem="xlE-jn-d9d" firstAttribute="top" secondItem="Fh1-cJ-kef" secondAttribute="bottom" constant="17" id="tAQ-Ex-GoD"/>
                             <constraint firstItem="uc7-DI-wbk" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" id="tFc-yS-6rr"/>
-                            <constraint firstItem="xlE-jn-d9d" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" constant="7" id="urX-Bw-BK9"/>
+                            <constraint firstItem="xlE-jn-d9d" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" id="urX-Bw-BK9"/>
                             <constraint firstItem="oFd-73-ZBj" firstAttribute="centerX" secondItem="Pb5-Tr-jZM" secondAttribute="centerX" id="w3I-sh-ckZ"/>
                         </constraints>
                     </view>
@@ -222,7 +222,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="94F-rQ-OBS" secondAttribute="trailing" constant="-20" id="sV1-lR-4a7"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Станция отправления" id="uiK-8r-eZt"/>
+                    <navigationItem key="navigationItem" title="Станция отправления" id="uiK-8r-eZt">
+                        <barButtonItem key="backBarButtonItem" title="Расписание" id="tx0-Be-YyT"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="W3q-4o-UfJ" id="3de-LP-HM2"/>
                         <outlet property="tableView" destination="94F-rQ-OBS" id="c1D-oJ-CdM"/>
