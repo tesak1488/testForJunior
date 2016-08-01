@@ -10,16 +10,14 @@ import UIKit
 
 class ScheduleTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var countryTitle: UILabel!
     @IBOutlet weak var stationTitle: UILabel!
   
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(false, animated: animated)
 
         // Configure the view for the selected state
     }

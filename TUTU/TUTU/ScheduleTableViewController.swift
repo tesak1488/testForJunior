@@ -15,11 +15,13 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
     var stationCityTitles = [String]()
     var groupedStations  = [[Station]]()
     var resultsSearchController = UISearchController(searchResultsController: nil)
+    var country = ""
     
     @IBOutlet weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Info.stationsFrom.isEmpty {
+        if (Info.stationsLists[country] == nil) {
         let task = NSURLSession.sharedSession().dataTaskWithRequest(NSURLRequest(URL: NSURL(string: "https://raw.githubusercontent.com/tutu-ru/hire_ios-test/master/allStations.json")!), completionHandler: {
             (data, response, error) -> Void in
             
@@ -30,13 +32,13 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
             if let data = data {
                 self.parseJson(data)
                 self.makeStationsGrouped()
-                Info.stationsFrom = self.stations
+                Info.stationsLists.updateValue(self.stations, forKey: self.country)
                 NSOperationQueue.mainQueue().addOperationWithBlock({()-> Void in self.tableView.reloadData()})
             }
         })
             task.resume()
         } else {
-            stations = Info.stationsFrom
+            stations = Info.stationsLists[country]!
             makeStationsGrouped()
             tableView.reloadData()
         }
@@ -47,10 +49,6 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
         definesPresentationContext = true
         tableView.tableHeaderView = resultsSearchController.searchBar
         }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if resultsSearchController.active {
@@ -80,10 +78,8 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! ScheduleTableViewCell
         if resultsSearchController.active {
-            cell.countryTitle.text = filteredStations[indexPath.row].countryTitle
             cell.stationTitle.text = filteredStations[indexPath.row].stationTitle
         } else {
-            cell.countryTitle.text = groupedStations[indexPath.section][indexPath.row].countryTitle
             cell.stationTitle.text = groupedStations[indexPath.section][indexPath.row].stationTitle
         }
         return cell
@@ -95,6 +91,7 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
         } else {
             Info.stationFrom = groupedStations[indexPath.section][indexPath.row].stationTitle
         }
+        self.navigationController?.popViewControllerAnimated(true)
         self.navigationController?.popViewControllerAnimated(true)
     }
     
@@ -127,19 +124,20 @@ class ScheduleTableViewController: UIViewController, UITableViewDelegate, UITabl
             let jsonResult = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary
             let citiesFrom = jsonResult!["citiesFrom"] as! [AnyObject]
             for cityFrom in citiesFrom {
-                let stations = cityFrom["stations"] as! [AnyObject]
-                for station in stations {
-                    let localStation = Station()
-                    localStation.countryTitle = station["countryTitle"] as! String
-                    localStation.cityTitle = station["cityTitle"] as! String
-                    localStation.point["latitude"] = station["point"]!!["latitude"] as? Double
-                    localStation.point["longitude"] = station["point"]!!["longitude"] as? Double
-                    localStation.stationTitle = station["stationTitle"] as! String
-                    localStation.cityId = station["cityId"] as! Int
-                    localStation.regionTitle = station["regionTitle"] as! String
-                    localStation.districtTitle = station["districtTitle"] as! String
-                    localStation.stationId = station["stationId"] as! Int
-                    self.stations.append(localStation)
+                if cityFrom["countryTitle"] as! String == country {
+                    let stations = cityFrom["stations"] as! [AnyObject]
+                    for station in stations {
+                        let localStation = Station()
+                        localStation.cityTitle = station["cityTitle"] as! String
+                        localStation.point["latitude"] = station["point"]!!["latitude"] as? Double
+                        localStation.point["longitude"] = station["point"]!!["longitude"] as? Double
+                        localStation.stationTitle = station["stationTitle"] as! String
+                        localStation.cityId = station["cityId"] as! Int
+                        localStation.regionTitle = station["regionTitle"] as! String
+                        localStation.districtTitle = station["districtTitle"] as! String
+                        localStation.stationId = station["stationId"] as! Int
+                        self.stations.append(localStation)
+                    }
                 }
             }
         } catch {

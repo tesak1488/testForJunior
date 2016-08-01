@@ -16,6 +16,8 @@
 		3F897CAF1D3FDD4E0084A248 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F897CAE1D3FDD4E0084A248 /* ScheduleTableViewCell.swift */; };
 		3F897CB51D3FE3E50084A248 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F897CB41D3FE3E50084A248 /* Station.swift */; };
 		3F93CCC91D4686DF00C653B6 /* ScheduleToController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F93CCC81D4686DF00C653B6 /* ScheduleToController.swift */; };
+		3FA68F941D4F51F80007B6D7 /* CountriesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA68F931D4F51F80007B6D7 /* CountriesController.swift */; };
+		3FA68F961D4F69F10007B6D7 /* CountriesToController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA68F951D4F69F10007B6D7 /* CountriesToController.swift */; };
 		3FD212351D45098A00DFBA3F /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD212341D45098A00DFBA3F /* Info.swift */; };
 		3FDE865F1D43B5950081D325 /* ChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE865E1D43B5950081D325 /* ChooseViewController.swift */; };
 		3FDE86611D43B7DB0081D325 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDE86601D43B7DB0081D325 /* DateViewController.swift */; };
@@ -33,6 +35,8 @@
 		3F897CAE1D3FDD4E0084A248 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		3F897CB41D3FE3E50084A248 /* Station.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		3F93CCC81D4686DF00C653B6 /* ScheduleToController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleToController.swift; sourceTree = "<group>"; };
+		3FA68F931D4F51F80007B6D7 /* CountriesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesController.swift; sourceTree = "<group>"; };
+		3FA68F951D4F69F10007B6D7 /* CountriesToController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountriesToController.swift; sourceTree = "<group>"; };
 		3FD212341D45098A00DFBA3F /* Info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Info.swift; path = ../Info.swift; sourceTree = "<group>"; };
 		3FDE865E1D43B5950081D325 /* ChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseViewController.swift; path = ../ChooseViewController.swift; sourceTree = "<group>"; };
 		3FDE86601D43B7DB0081D325 /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
@@ -70,9 +74,11 @@
 			children = (
 				3F897C981D3FDB5D0084A248 /* AppDelegate.swift */,
 				3F897C9C1D3FDB5D0084A248 /* AboutViewController.swift */,
+				3FDE865E1D43B5950081D325 /* ChooseViewController.swift */,
+				3FA68F931D4F51F80007B6D7 /* CountriesController.swift */,
+				3FA68F951D4F69F10007B6D7 /* CountriesToController.swift */,
 				3F897CAC1D3FDCA40084A248 /* ScheduleTableViewController.swift */,
 				3F93CCC81D4686DF00C653B6 /* ScheduleToController.swift */,
-				3FDE865E1D43B5950081D325 /* ChooseViewController.swift */,
 				3FDE86601D43B7DB0081D325 /* DateViewController.swift */,
 				3F897CB41D3FE3E50084A248 /* Station.swift */,
 				3FD212341D45098A00DFBA3F /* Info.swift */,
@@ -157,9 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA68F941D4F51F80007B6D7 /* CountriesController.swift in Sources */,
 				3F897CAD1D3FDCA40084A248 /* ScheduleTableViewController.swift in Sources */,
 				3FD212351D45098A00DFBA3F /* Info.swift in Sources */,
 				3F897C9D1D3FDB5D0084A248 /* AboutViewController.swift in Sources */,
+				3FA68F961D4F69F10007B6D7 /* CountriesToController.swift in Sources */,
 				3FDE86611D43B7DB0081D325 /* DateViewController.swift in Sources */,
 				3F897CAF1D3FDD4E0084A248 /* ScheduleTableViewCell.swift in Sources */,
 				3F897C991D3FDB5D0084A248 /* AppDelegate.swift in Sources */,
